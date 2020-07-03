@@ -5,27 +5,27 @@
 
     $id = $_POST['id'];
     
-    $queryRow = "SELECT * FROM tuvung WHERE id = '8'";
-    $dataupdate = mysqli_query($con , $queryRow);
+    $queryFilter = "SELECT * FROM tuvung Where id = '$id' LIMIT 1";
+    $dataFilter = mysqli_query($con , $queryFilter);
 
-    if ($dataupdate){
-        echo "Co";
-        // $query = "DELETE FROM tuvung WHERE id = '$id'";
+    $rowcount = mysqli_num_rows($dataFilter);
 
-        // $data = mysqli_query($con , $query);
-        // $array = [];
+    if ($rowcount > 0){
+        $query = "DELETE FROM tuvung WHERE id = '$id'";
+
+        $data = mysqli_query($con , $query);
+        $array = [];
       
-        // if($data){
-        //     while($row = mysqli_fetch_assoc($dataupdate)){
-        //         array_push($array , new WordModel($row['id'],$row['en'],$row['vn'],$row['ismemorized'] == '0' ? true : false));
-        //     }
-        //     echo json_encode(new Response(true , null ,$array ));
-        // }else{
-        //     echo json_encode(new Response(false , "Xóa thất bại" ,[]));
-        // }
+        if($data){
+            while($row = mysqli_fetch_assoc($dataFilter)){
+                array_push($array , new WordModel($row['id'],$row['en'],$row['vn'],$row['ismemorized'] == '0' ? true : false));
+            }
+            echo json_encode(new Response(true , null ,$array ));
+        }else{
+            echo json_encode(new Response(false , "Xóa thất bại" ,[]));
+        }
     }else{
-        echo "Khong";
-        // echo json_encode(new Response(false , "Xóa thất bại" ,[]));
+        echo json_encode(new Response(false , "Giá trị không tồn tại" ,[]));
     }
    
 ?>
