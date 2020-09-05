@@ -25,7 +25,7 @@
         $rowcount = mysqli_num_rows($dataFilter);
 
         if($rowcount > 0 ){
-            while($row = mysqli_fetch_assoc($dataupdate)){
+            while($row = mysqli_fetch_assoc($dataFilter)){
                 array_push($array , new WordModel($row['id'],$row['en'],$row['vn'],$row['ismemorized'] == '0' ? false: true));
             }
             echo json_encode(new Response(true , null ,$array ));
