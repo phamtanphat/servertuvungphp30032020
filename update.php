@@ -6,6 +6,13 @@
     $id = $_POST['id'];
     $ismemorized = $_POST['ismemorized'];
 
+    if (strlen($id) <= 0){
+        echo json_encode(new Response(false , "Bạn chưa truyền id" ,[]));
+        return;
+    } else if (strlen($ismemorized) <= 0){
+        echo json_encode(new Response(false , "Dữ liệu ghi nhớ rỗng" ,[]));
+        return;
+    } 
     $query = "UPDATE tuvung SET ismemorized = '$ismemorized'  WHERE Id = '$id'";
 
     $data = mysqli_query($con , $query);

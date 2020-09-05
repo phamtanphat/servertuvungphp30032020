@@ -4,6 +4,10 @@
     require('wordmodel.php');
 
     $id = $_POST['id'];
+    if (strlen($id) <= 0){
+        echo json_encode(new Response(false , "Bạn chưa truyền id" ,[]));
+        return;
+    }
     
     $queryFilter = "SELECT * FROM tuvung Where id = '$id' LIMIT 1";
     $dataFilter = mysqli_query($con , $queryFilter);

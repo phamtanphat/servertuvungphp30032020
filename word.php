@@ -15,7 +15,7 @@
     
     $offset = ($currentpage - 1) * $items_per_page;
 
-    $query = "SELECT * FROM tuvung Orders LIMIT " . $offset . "," . $items_per_page;
+    $query = "SELECT * FROM tuvung ORDER BY id DESC LIMIT " . $offset . "," . $items_per_page ;
 
     $result = mysqli_query($con ,"SELECT * FROM tuvung");
 
